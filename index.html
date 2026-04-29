@@ -40,6 +40,39 @@
             letter-spacing: 2px;
         }
         
+        /* Music Button */
+        .music-control {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .music-btn {
+            background: linear-gradient(135deg, #C4621E, #8B4513);
+            border: 2px solid #F4A460;
+            color: #F4A460;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(196, 98, 30, 0.4);
+        }
+        
+        .music-btn.muted {
+            opacity: 0.5;
+        }
+        
         /* Main Container */
         .container {
             max-width: 1200px;
@@ -420,10 +453,31 @@
             .lanterns {
                 display: none;
             }
+            
+            .music-control {
+                top: 70px;
+                right: 10px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- Music Control -->
+    <div class="music-control">
+        <button id="musicBtn" class="music-btn muted" onclick="toggleMusic()" title="Click to play music">
+            🔇
+        </button>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+        <!-- Option 1: Use your own uploaded file -->
+        <source src="cny-music.mp3" type="audio/mpeg">
+        
+        <!-- Option 2: Use a free external URL (uncomment and replace) -->
+        <!-- <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"> -->
+    </audio>
 
     <!-- Navigation -->
     <div class="nav">
@@ -536,7 +590,7 @@
     </div>
 
     <script>
-        // Array of fortunes - add as many as you want!
+        // Array of fortunes
         const fortunes = [
             {
                 chinese: "马到成功",
@@ -590,12 +644,32 @@
 
         let currentFortune = null;
 
+        // Music control
+        let isPlaying = false;
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.innerHTML = '🔇';
+                musicBtn.classList.add('muted');
+            } else {
+                bgMusic.play().catch(e => {
+                    console.log('Audio play failed:', e);
+                    alert('Click anywhere on the page first, then try the music button again!');
+                });
+                musicBtn.innerHTML = '🎵';
+                musicBtn.classList.remove('muted');
+            }
+            isPlaying = !isPlaying;
+        }
+
         function openModal() {
             document.getElementById('modal').classList.add('active');
             document.getElementById('envelopeView').style.display = 'block';
             document.getElementById('fortuneResult').style.display = 'none';
             document.getElementById('progressBar').style.width = '0%';
-            // Pick a random fortune when opening
             currentFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
         }
         
@@ -615,7 +689,6 @@
                 document.getElementById('envelopeView').style.display = 'none';
                 document.getElementById('fortuneResult').style.display = 'block';
                 
-                // Display the randomly selected fortune
                 document.getElementById('fortuneChinese').textContent = currentFortune.chinese;
                 document.getElementById('fortuneEnglish').textContent = currentFortune.english;
                 document.getElementById('fortuneMessage').textContent = currentFortune.message;
