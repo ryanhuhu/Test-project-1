@@ -323,7 +323,7 @@
             border-radius: 20px;
             padding: 40px;
             text-align: center;
-            max-width: 400px;
+            max-width: 450px;
             width: 100%;
             position: relative;
         }
@@ -369,10 +369,38 @@
         .fortune-result {
             display: none;
             margin-top: 20px;
-            padding: 20px;
+            padding: 25px;
             background: #F4A460;
             color: #8B4513;
-            border-radius: 10px;
+            border-radius: 15px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fortune-chinese {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .fortune-english {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .fortune-message {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .fortune-emoji {
+            font-size: 50px;
+            margin-top: 15px;
         }
         
         /* Responsive */
@@ -499,20 +527,76 @@
             </div>
             
             <div class="fortune-result" id="fortuneResult">
-                <div style="font-size: 32px; font-weight: bold; margin-bottom: 10px;">马到成功</div>
-                <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Instant Success!</div>
-                <p>May you achieve immediate success and gallop toward greatness in the Year of the Horse!</p>
-                <div style="font-size: 40px; margin-top: 15px;">🐎✨🧧</div>
+                <div class="fortune-chinese" id="fortuneChinese"></div>
+                <div class="fortune-english" id="fortuneEnglish"></div>
+                <div class="fortune-message" id="fortuneMessage"></div>
+                <div class="fortune-emoji" id="fortuneEmoji"></div>
             </div>
         </div>
     </div>
 
     <script>
+        // Array of fortunes - add as many as you want!
+        const fortunes = [
+            {
+                chinese: "马到成功",
+                english: "Instant Success!",
+                message: "May you achieve immediate success and gallop toward greatness in the Year of the Horse!",
+                emoji: "🐎✨🧧"
+            },
+            {
+                chinese: "财源广进",
+                english: "Wealth Flows In!",
+                message: "May wealth pour in from all directions and prosperity fill your home!",
+                emoji: "💰🌊🏠"
+            },
+            {
+                chinese: "步步高升",
+                english: "Rise Step by Step!",
+                message: "May your career soar higher with each step and success follow you everywhere!",
+                emoji: "📈🎯🌟"
+            },
+            {
+                chinese: "身体健康",
+                english: "Good Health!",
+                message: "May you enjoy robust health, boundless energy, and vitality all year long!",
+                emoji: "💪🍎🌈"
+            },
+            {
+                chinese: "心想事成",
+                english: "Dreams Come True!",
+                message: "May all your wishes be fulfilled and your heart's desires become reality!",
+                emoji: "💫❤️🎆"
+            },
+            {
+                chinese: "五福临门",
+                english: "Five Blessings Arrive!",
+                message: "May longevity, wealth, health, virtue, and a peaceful death be yours!",
+                emoji: "🎊🏮🎉"
+            },
+            {
+                chinese: "龙马精神",
+                english: "Dragon-Horse Spirit!",
+                message: "May you possess the vigor of a dragon and the strength of a horse!",
+                emoji: "🐉🐎🔥"
+            },
+            {
+                chinese: "吉星高照",
+                english: "Lucky Stars Shine!",
+                message: "May fortunate stars shine upon you and bring endless good luck!",
+                emoji: "⭐🌟✨"
+            }
+        ];
+
+        let currentFortune = null;
+
         function openModal() {
             document.getElementById('modal').classList.add('active');
             document.getElementById('envelopeView').style.display = 'block';
             document.getElementById('fortuneResult').style.display = 'none';
             document.getElementById('progressBar').style.width = '0%';
+            // Pick a random fortune when opening
+            currentFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
         }
         
         function closeModal() {
@@ -530,6 +614,12 @@
             setTimeout(function() {
                 document.getElementById('envelopeView').style.display = 'none';
                 document.getElementById('fortuneResult').style.display = 'block';
+                
+                // Display the randomly selected fortune
+                document.getElementById('fortuneChinese').textContent = currentFortune.chinese;
+                document.getElementById('fortuneEnglish').textContent = currentFortune.english;
+                document.getElementById('fortuneMessage').textContent = currentFortune.message;
+                document.getElementById('fortuneEmoji').textContent = currentFortune.emoji;
             }, 1000);
         }
         
