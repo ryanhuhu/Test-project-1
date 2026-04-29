@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese New Year 2026 - Year of the Horse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        .nav {
+            background-color: #0f0f0f;
+            border-bottom: 2px solid #C4621E;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-left {
+            color: #C4621E;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .nav-right {
+            color: #C4621E;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        
+        /* Left Side - Text */
+        .text-section {
+            text-align: center;
+        }
+        
+        .lanterns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .lantern {
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(to bottom, #C4621E 0%, #8B4513 100%);
+            border-radius: 30px;
+            position: relative;
+            border: 2px solid #F4A460;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #F4A460;
+            font-weight: bold;
+        }
+        
+        .lantern::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 10px;
+            background: #654321;
+        }
+        
+        .lantern::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 15px;
+            background: #F4A460;
+        }
+        
+        .subtitle {
+            color: #C4621E;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .main-title {
+            font-size: 72px;
+            background: linear-gradient(to right, #C4621E, #F4A460, #C4621E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        
+        .english-title {
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        
+        .description {
+            color: #cccccc;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #C4621E, #8B4513);
+            color: #F4A460;
+            border: 2px solid #F4A460;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #C4621E;
+            border: 2px solid #C4621E;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        /* Right Side - Photo Card */
+        .photo-section {
+            position: relative;
+        }
+        
+        .photo-card {
+            background: linear-gradient(135deg, #8B4513 0%, #C4621E 50%, #8B4513 100%);
+            padding: 5px;
+            border-radius: 20px;
+            border: 3px solid #F4A460;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        
+        .photo-inner {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .photo-inner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #F4A460;
+            z-index: 10;
+        }
+        
+        .corner-tl { top: 15px; left: 15px; border-right: none; border-bottom: none; border-radius: 10px 0 0 0; }
+        .corner-tr { top: 15px; right: 15px; border-left: none; border-bottom: none; border-radius: 0 10px 0 0; }
+        .corner-bl { bottom: 15px; left: 15px; border-right: none; border-top: none; border-radius: 0 0 0 10px; }
+        .corner-br { bottom: 15px; right: 15px; border-left: none; border-top: none; border-radius: 0 0 10px 0; }
+        
+        .badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #C4621E;
+            border: 3px solid #F4A460;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 32px;
+            color: #F4A460;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 20;
+        }
+        
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .overlay-text {
+            color: #C4621E;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        
+        .overlay-chinese {
+            color: #ffffff;
+            font-size: 28px;
+        }
+        
+        /* Decorations */
+        .decoration {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: #C4621E;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            border: 3px solid #F4A460;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .dec-1 { top: -20px; right: -20px; }
+        .dec-2 { bottom: -20px; left: -20px; font-size: 24px; }
+        
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: rgba(196, 98, 30, 0.1);
+            border: 1px solid rgba(196, 98, 30, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            color: #C4621E;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .feature-desc {
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #C4621E 0%, #8B4513 100%);
+            border: 3px solid #F4A460;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #F4A460;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        .envelope-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        
+        .fortune-text {
+            color: #F4A460;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: #F4A460;
+            width: 0%;
+            transition: width 1s ease;
+        }
+        
+        .fortune-result {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #F4A460;
+            color: #8B4513;
+            border-radius: 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-title {
+                font-size: 48px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .lanterns {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <div class="nav-left">马年大吉</div>
+        <div class="nav-right">YEAR OF THE HORSE 2026</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Hero Section -->
+        <div class="hero">
+            
+            <!-- Left: Text -->
+            <div class="text-section">
+                <div class="lanterns">
+                    <div class="lantern">福</div>
+                    <div class="lantern">春</div>
+                    <div class="lantern">财</div>
+                </div>
+                
+                <div class="subtitle">Wishing You Prosperity</div>
+                <h1 class="main-title">新年快乐</h1>
+                <h2 class="english-title">Happy Chinese New Year</h2>
+                <p class="description">
+                    May the Year of the Horse bring you strength, freedom, and unstoppable energy. 
+                    Gallop toward your dreams with courage and determination!
+                </p>
+                
+                <div class="buttons">
+                    <button class="btn-primary" onclick="openModal()">
+                        <span>🧧</span>
+                        <span>Open Red Envelope</span>
+                    </button>
+                    <button class="btn-secondary" onclick="shareGreeting()">
+                        Share Blessings
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Right: Photo Card -->
+            <div class="photo-section">
+                <div class="photo-card">
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+                    
+                    <div class="photo-inner">
+                        <img src="/mnt/kimi/upload/6A5675BB-F4DA-4C6B-845E-85F79E5BAC56.jpg" alt="CNY Greeting">
+                        
+                        <div class="badge">马年大吉</div>
+                        
+                        <div class="photo-overlay">
+                            <div class="overlay-text">Wishing You</div>
+                            <div class="overlay-chinese">万事如意</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="decoration dec-1">福</div>
+                <div class="decoration dec-2">¥</div>
+            </div>
+        </div>
+        
+        <!-- Features -->
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🐎</div>
+                <div class="feature-title">力量</div>
+                <div class="feature-desc">Strength & Power</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💨</div>
+                <div class="feature-title">速度</div>
+                <div class="feature-desc">Speed & Progress</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔥</div>
+                <div class="feature-title">热情</div>
+                <div class="feature-desc">Passion & Energy</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            
+            <div id="envelopeView">
+                <div class="envelope-icon">🧧</div>
+                <div class="fortune-text">红包</div>
+                <p style="color: white; margin-bottom: 10px;">Click to reveal your fortune</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <button class="btn-primary" style="margin-top: 20px;" onclick="revealFortune()">
+                    Reveal Fortune
+                </button>
+            </div>
+            
+            <div class="fortune-result" id="fortuneResult">
+                <div style="font-size: 32px; font-weight: bold; margin-bottom: 10px;">马到成功</div>
+                <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">Instant Success!</div>
+                <p>May you achieve immediate success and gallop toward greatness in the Year of the Horse!</p>
+                <div style="font-size: 40px; margin-top: 15px;">🐎✨🧧</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('modal').classList.add('active');
+            document.getElementById('envelopeView').style.display = 'block';
+            document.getElementById('fortuneResult').style.display = 'none';
+            document.getElementById('progressBar').style.width = '0%';
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+        
+        function closeModalOutside(event) {
+            if (event.target === document.getElementById('modal')) {
+                closeModal();
+            }
+        }
+        
+        function revealFortune() {
+            document.getElementById('progressBar').style.width = '100%';
+            setTimeout(function() {
+                document.getElementById('envelopeView').style.display = 'none';
+                document.getElementById('fortuneResult').style.display = 'block';
+            }, 1000);
+        }
+        
+        function shareGreeting() {
+            var text = "Happy Chinese New Year 2026! Wishing you strength and success in the Year of the Horse! 🐎🧧";
+            if (navigator.share) {
+                navigator.share({
+                    title: 'CNY 2026',
+                    text: text
+                });
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(function() {
+                    alert('Greeting copied to clipboard!');
+                });
+            } else {
+                alert(text);
+            }
+        }
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
